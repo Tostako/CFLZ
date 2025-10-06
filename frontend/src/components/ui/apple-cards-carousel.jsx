@@ -48,16 +48,13 @@ export const Carousel = ({ items, initialScroll = 0, autoScrollInterval = 4000 }
         if (!isHovered && carouselRef.current) {
           const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
           
-          // Verificamos si estamos muy cerca del final (con un margen de 10px)
           if (scrollLeft >= scrollWidth - clientWidth - 10) {
-            // Si llegamos al final, volvemos al inicio después de una pequeña pausa
             setTimeout(() => {
               if (carouselRef.current) {
                 carouselRef.current.scrollTo({ left: 0, behavior: "smooth" });
               }
-            }, 500); // Pausa de 500ms antes de volver al inicio
+            }, 500);
           } else {
-            // Continuamos hacia la derecha
             carouselRef.current.scrollBy({ left: 300, behavior: "smooth" });
           }
         }
@@ -117,26 +114,24 @@ export const Carousel = ({ items, initialScroll = 0, autoScrollInterval = 4000 }
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* Botón izquierdo */}
         <button
-          className="absolute left-4 top-1/2 z-50 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 shadow-lg backdrop-blur-sm transition-all duration-200 hover:bg-white hover:scale-110 disabled:opacity-50 disabled:hover:scale-100"
+          className="absolute left-2 sm:left-4 top-1/2 z-50 flex h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 shadow-lg backdrop-blur-sm transition-all duration-200 hover:bg-white hover:scale-110 disabled:opacity-50 disabled:hover:scale-100"
           onClick={scrollLeft}
           disabled={!canScrollLeft}
         >
-          <IconArrowNarrowLeft className="h-6 w-6 text-gray-700" />
+          <IconArrowNarrowLeft className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-gray-700" />
         </button>
 
-        {/* Botón derecho */}
         <button
-          className="absolute right-4 top-1/2 z-50 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 shadow-lg backdrop-blur-sm transition-all duration-200 hover:bg-white hover:scale-110 disabled:opacity-50 disabled:hover:scale-100"
+          className="absolute right-2 sm:right-4 top-1/2 z-50 flex h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 shadow-lg backdrop-blur-sm transition-all duration-200 hover:bg-white hover:scale-110 disabled:opacity-50 disabled:hover:scale-100"
           onClick={scrollRight}
           disabled={!canScrollRight}
         >
-          <IconArrowNarrowRight className="h-6 w-6 text-gray-700" />
+          <IconArrowNarrowRight className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-gray-700" />
         </button>
 
         <div
-          className="flex w-full overflow-x-scroll overscroll-x-auto scroll-smooth py-10 [scrollbar-width:none] md:py-20"
+          className="flex w-full overflow-x-scroll overscroll-x-auto scroll-smooth py-4 sm:py-6 md:py-10 lg:py-20 [scrollbar-width:none]"
           ref={carouselRef}
           onScroll={checkScrollability}
         >
@@ -144,7 +139,7 @@ export const Carousel = ({ items, initialScroll = 0, autoScrollInterval = 4000 }
 
           <div
             className={cn(
-              "flex flex-row justify-start gap-4 pl-4",
+              "flex flex-row justify-start gap-2 sm:gap-3 md:gap-4 pl-2 sm:pl-3 md:pl-4",
               "mx-auto max-w-7xl"
             )}
           >
@@ -162,7 +157,7 @@ export const Carousel = ({ items, initialScroll = 0, autoScrollInterval = 4000 }
                   },
                 }}
                 key={"card" + index}
-                className="rounded-3xl last:pr-[5%] md:last:pr-[33%]"
+                className="rounded-3xl last:pr-[5%] sm:last:pr-[15%] md:last:pr-[25%] lg:last:pr-[33%]"
               >
                 {item}
               </motion.div>
@@ -176,6 +171,7 @@ export const Carousel = ({ items, initialScroll = 0, autoScrollInterval = 4000 }
 
 export const Card = ({ card, index, layout = false }) => {
   const [open, setOpen] = useState(false);
+  const [imgError, setImgError] = useState(false);
   const containerRef = useRef(null);
   const { onCardClose, currentIndex } = useContext(CarouselContext);
   const navigate = useNavigate();
@@ -225,27 +221,27 @@ export const Card = ({ card, index, layout = false }) => {
               exit={{ opacity: 0 }}
               ref={containerRef}
               layoutId={layout ? `card-${card.title}` : undefined}
-              className="relative z-[60] mx-auto my-10 h-fit max-w-5xl rounded-3xl bg-white p-4 font-sans md:p-10 dark:bg-neutral-900"
+              className="relative z-[60] mx-auto my-4 sm:my-6 md:my-10 h-fit max-w-xs sm:max-w-2xl md:max-w-4xl lg:max-w-5xl rounded-3xl bg-white p-3 sm:p-6 md:p-8 lg:p-10 font-sans dark:bg-neutral-900"
             >
               <button
-                className="sticky top-4 right-0 ml-auto flex h-8 w-8 items-center justify-center rounded-full bg-black dark:bg-white"
-                onClick={handleClose}
+                className="sticky top-2 sm:top-4 right-0 ml-auto flex h-6 w-6 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-black dark:bg-white"
+                
               >
-                <IconX className="h-6 w-6 text-neutral-100 dark:text-neutral-900" />
+                <IconX className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-neutral-100 dark:text-neutral-900" />
               </button>
               <motion.p
                 layoutId={layout ? `category-${card.title}` : undefined}
-                className="text-base font-medium text-black dark:text-white"
+                className="text-sm sm:text-base font-medium text-black dark:text-white"
               >
                 {card.category}
               </motion.p>
               <motion.p
                 layoutId={layout ? `title-${card.title}` : undefined}
-                className="mt-4 text-2xl font-semibold text-neutral-700 md:text-5xl dark:text-white"
+                className="mt-2 sm:mt-4 text-lg sm:text-xl md:text-2xl lg:text-5xl font-semibold text-neutral-700 dark:text-white"
               >
                 {card.title}
               </motion.p>
-              <div className="py-10">{card.content}</div>
+              <div className="py-4 sm:py-6 md:py-8 lg:py-10">{card.content}</div>
             </motion.div>
           </div>
         )}
@@ -253,28 +249,20 @@ export const Card = ({ card, index, layout = false }) => {
 
       <motion.button
         layoutId={layout ? `card-${card.title}` : undefined}
-        onClick={() => {
-          navigate("/diseños", {
-            state: {
-              title: card.title,
-              category: card.category,
-              src: card.src,
-            },
-          });
-        }}
-        className="relative z-10 flex h-80 w-56 flex-col items-start justify-start overflow-hidden rounded-3xl bg-gray-100 md:h-[40rem] md:w-96 dark:bg-neutral-900"
+        
+        className="relative z-10 flex h-64 w-48 sm:h-72 sm:w-52 md:h-80 md:w-56 lg:h-[40rem] lg:w-96 flex-col items-start justify-start overflow-hidden rounded-3xl bg-gray-100 dark:bg-neutral-900"
       >
         <div className="pointer-events-none absolute inset-x-0 top-0 z-30 h-full bg-gradient-to-b from-black/50 via-transparent to-transparent" />
-        <div className="relative z-40 p-8">
+        <div className="relative z-40 p-4 sm:p-6 md:p-8">
           <motion.p
             layoutId={layout ? `category-${card.category}` : undefined}
-            className="text-left font-sans text-sm font-medium text-white md:text-base"
+            className="text-left font-sans text-xs sm:text-sm font-medium text-white md:text-base"
           >
             {card.category}
           </motion.p>
           <motion.p
             layoutId={layout ? `title-${card.title}` : undefined}
-            className="mt-2 max-w-xs text-left font-sans text-xl font-semibold [text-wrap:balance] text-white md:text-3xl"
+            className="mt-1 sm:mt-2 max-w-xs text-left font-sans text-base sm:text-lg md:text-xl lg:text-3xl font-semibold [text-wrap:balance] text-white"
           >
             {card.title}
           </motion.p>
@@ -283,13 +271,22 @@ export const Card = ({ card, index, layout = false }) => {
           src={card.src}
           alt={card.title}
           className="absolute inset-0 z-10 object-cover"
+          onError={() => {
+            console.error('❌ Error loading image:', card.src);
+            setImgError(true);
+          }}
         />
+        {imgError && (
+          <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-200">
+            <p className="text-gray-500">Imagen no disponible</p>
+          </div>
+        )}
       </motion.button>
     </>
   );
 };
 
-export const BlurImage = ({ height, width, src, className, alt, ...rest }) => {
+export const BlurImage = ({ height, width, src, className, alt, onError, ...rest }) => {
   const [isLoading, setLoading] = useState(true);
 
   return (
@@ -300,6 +297,10 @@ export const BlurImage = ({ height, width, src, className, alt, ...rest }) => {
         className
       )}
       onLoad={() => setLoading(false)}
+      onError={(e) => {
+        setLoading(false);
+        if (onError) onError(e);
+      }}
       src={src}
       width={width}
       height={height}

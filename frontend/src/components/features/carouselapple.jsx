@@ -2,6 +2,9 @@
 
 import React from "react";
 import { Carousel, Card } from "../ui/apple-cards-carousel";
+import casa from '../../assets/CFLZ.JPG';
+import boda from '../../assets/boda.png';
+import mesa from '../../assets/mesa.png';
 
 export function AppleCardsCarouselDemo() {
     const cards = data.map((card, index) => (
@@ -9,10 +12,16 @@ export function AppleCardsCarouselDemo() {
     ));
 
     return (
-        <div className="w-full h-full py-20">
-            <h1 className="font-Montserrat-semi-bold text-5xl text-center" style={{ color: '#f5f4f0' }}>
-                Proyectos
-            </h1>
+        <div className="w-full h-full py-8 sm:py-12 lg:py-20">
+            <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+                <h1 className="font-Montserrat-semi-bold text-3xl sm:text-4xl lg:text-5xl text-center px-4 mb-4" style={{ color: '#4a7c59' }}>
+                    Proyectos
+                </h1>
+                <div className="w-24 h-1 bg-[#4a7c59] mx-auto rounded-full"></div>
+                <p className="text-[#4a7c59] text-sm sm:text-base lg:text-lg mt-6 px-4 max-w-2xl mx-auto opacity-80">
+                    Descubre nuestra galería de proyectos arquitectónicos que reflejan excelencia, innovación y distinción
+                </p>
+            </div>
             <Carousel items={cards} />
         </div>
     );
@@ -21,27 +30,27 @@ export function AppleCardsCarouselDemo() {
 const DummyContent = () => {
     return (
         <>
-            {[...new Array(3).fill(1)].map((_, index) => {
+            {[...new Array(2).fill(1)].map((_, index) => {
                 return (
                     <div
                         key={"dummy-content" + index}
-                        className="bg-[#F5F5F7] dark:bg-neutral-800 p-8 md:p-14 rounded-3xl mb-4">
+                        className="bg-[#F5F5F7] dark:bg-neutral-800 p-4 sm:p-6 md:p-8 lg:p-12 rounded-3xl mb-6">
                         <p
-                            className="text-neutral-600 dark:text-neutral-400 text-base md:text-2xl font-sans max-w-3xl mx-auto">
+                            className="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base md:text-lg lg:text-xl font-sans max-w-4xl mx-auto leading-relaxed">
                             <span className="font-bold text-neutral-700 dark:text-neutral-200">
-                                The first rule of Apple club is that you boast about Apple club.
+                                Excelencia arquitectónica en cada detalle.
                             </span>{" "}
-                            Keep a journal, quickly jot down a grocery list, and take amazing
-                            class notes. Want to convert those notes to text? No problem.
-                            Langotiya jeetu ka mara hua yaar is ready to capture every
-                            thought.
+                            Nuestros proyectos representan la perfecta fusión entre diseño innovador, 
+                            construcción de precisión y acabados de lujo. Cada espacio es concebido 
+                            con una visión única que trasciende las tendencias, creando obras atemporales 
+                            que reflejan la personalidad y aspiraciones de nuestros clientes.
                         </p>
-                        <img
-                            src="https://assets.aceternity.com/macbook.png"
-                            alt="Macbook mockup from Aceternity UI"
-                            height="500"
-                            width="500"
-                            className="md:w-1/2 md:h-1/2 h-full w-full mx-auto object-contain" />
+                        <div className="mt-6 sm:mt-8">
+                            <img
+                                src={`https://images.unsplash.com/photo-${index === 0 ? '1600596542815' : '1600607687939'}-ffad4c1539a9?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3`}
+                                alt={`Proyecto arquitectónico ${index + 1}`}
+                                className="w-full sm:w-4/5 md:w-3/5 lg:w-2/5 h-auto mx-auto object-cover rounded-2xl shadow-lg" />
+                        </div>
                     </div>
                 );
             })}
@@ -51,40 +60,22 @@ const DummyContent = () => {
 
 const data = [
     {
-        category: "Artificial Intelligence",
-        title: "You can do more with AI.",
-        src: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        category: "Espacio Confortable",
+        title: "Elegancia, amplitud y calidez en un entorno diseñado para disfrutar cada momento.",
+        src: casa,
         content: <DummyContent />,
     },
     {
-        category: "Productivity",
-        title: "Enhance your productivity.",
-        src: "https://images.unsplash.com/photo-1531554694128-c4c6665f59c2?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        category: "Asesoría Integral de Eventos",
+        title: "Cuidamos cada detalle para que tu celebración sea perfecta y sin preocupaciones.",
+        src: boda,
         content: <DummyContent />,
     },
     {
-        category: "Product",
-        title: "Launching the new Apple Vision Pro.",
-        src: "https://images.unsplash.com/photo-1713869791518-a770879e60dc?q=80&w=2333&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        category: "Gastronomía Gourmet",
+        title: "Sabores exclusivos y presentaciones impecables que conquistan todos los sentidos.",
+        src: mesa,
         content: <DummyContent />,
     },
-
-    {
-        category: "Product",
-        title: "Maps for your iPhone 15 Pro Max.",
-        src: "https://images.unsplash.com/photo-1599202860130-f600f4948364?q=80&w=2515&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        content: <DummyContent />,
-    },
-    {
-        category: "iOS",
-        title: "Photography just got better.",
-        src: "https://images.unsplash.com/photo-1602081957921-9137a5d6eaee?q=80&w=2793&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        content: <DummyContent />,
-    },
-    {
-        category: "Hiring",
-        title: "Hiring for a Staff Software Engineer",
-        src: "https://images.unsplash.com/photo-1511984804822-e16ba72f5848?q=80&w=2048&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        content: <DummyContent />,
-    },
+    
 ];
